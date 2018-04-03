@@ -13,6 +13,36 @@ int getInt() {
 	return intvalue;
 }
 
+std::string getGrade(int g) {
+	std::string Grade;
+	switch (g) {
+	case 2:
+		Grade = "Uncommon";
+		break;
+	case 3:
+		Grade = "Great";
+		break;
+	case 4:
+		Grade = "Rare";
+		break;
+	case 5:
+		Grade = "Epic";
+		break;
+	case 6:
+		Grade = "Heroic";
+		break;
+	case 7:
+		Grade = "Devine";
+		break;
+	case 8:
+		Grade = "Mythic";
+		break;
+	default:
+		Grade = "Common";
+	}
+	return Grade;
+}
+
 void Command(std::string cmd) {
 	if (cmd == "cmd") {
 		printHelp();
@@ -29,8 +59,11 @@ void Command(std::string cmd) {
 	else if (cmd == "ACH") {
 		ACCalcH();
 	}
-	else if (cmd == "Ham") {
+	else if (cmd == "ham") {
 		hamGap();
+	}
+	else if (cmd == "Enh") {
+		enhanceCalc();
 	}
 
 
@@ -59,9 +92,6 @@ void Command(std::string cmd) {
 	else if (cmd == "Money") {
 		moneyCalc();
 	}
-	else if (cmd == "Enhance") {
-		enhanceCalc();
-	}
 }
 
 void printHelp() {
@@ -71,7 +101,8 @@ void printHelp() {
 	cout << "ACL \t \t Get %AC For Light Armor" << endl;
 	cout << "ACM \t \t Get %AC For Medium Armor" << endl;
 	cout << "ACH \t \t Get %AC For Heavy Armor" << endl;
-	cout << "Ham \t \t Calculate Hammer the Gap Bonus" << endl;
+	cout << "ham \t \t Calculate Hammer the Gap Bonus" << endl;
+	cout << "Enh \t \t Tells you what the next enhancement level will cost" << endl;
 	cout << "end \t \t End the Program" << endl << endl;
 }
 
@@ -155,7 +186,7 @@ void meleeCalc() {
 		num = getInt();
 		if (num >= 0) {
 			int num2 = pow(num, 2) * 12;
-			cout << "A grade  " << num << " weapon would do " << num2 << " damage" << endl << endl;
+			cout << "A " << getGrade(num) << " grade weapon would do " << num2 << " damage" << endl << endl;
 		}
 	}
 }
@@ -219,7 +250,7 @@ void XPCalc() {
 		cout << "Number: ";
 		num = getInt();
 		if (num >= 0) {
-			int num2 = pow(num, (.5)) * 150 + 50;
+			int num2 = pow(num, (1.125)) * 75;
 			cout << "A level " << num << "enemy should drop " << num2 << " EXP" << endl << endl;
 		}
 	}
@@ -257,7 +288,7 @@ void enhanceCalc() {
 //Healing ((2^.8x) * 5) Scale 1-10
 //Enemy (.1(x^3.9)+29.9)Scale 1-20
 //Boss (1(x^3.9) + 40)  Scale 1-20
-//Exp ((150(x^.5)) + 50)Scale 1-20
+//Exp ((75(x^1.115)*.5))Scale 1-20
 //Money (.5(X^3)+15)    Scale 1-20
 //Weapons ((x^3.2)+9)   Scale 1-40
 //Profession

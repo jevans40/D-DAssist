@@ -3,6 +3,9 @@
 #include <iostream>
 
 
+int getInt();
+
+std::string getGrade(int g = 0);
 
 void Command(std::string cmd);
 
