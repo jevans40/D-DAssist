@@ -21,6 +21,8 @@ void ACCalcH();
 
 void hamGap();
 
+void enhanceCalc();
+
 // Extras
 void magicCalc();
 
@@ -38,4 +40,3 @@ void XPCalc();
 
 void moneyCalc();
 
-void enhanceCalc();

@@ -1,4 +1,5 @@
 #include "Commands.h"
+#include "RollStat.h"
 
 using std::cout;
 using std::cin;
@@ -95,7 +96,7 @@ void Command(std::string cmd) {
 }
 
 void printHelp() {
-	cout << "Commands" << endl;
+	cout << "\t Commands \n" << endl;
 	cout << "cmd \t \t Print Commands" << endl;
 	cout << "ACI \t \t Info on how armor works" << endl;
 	cout << "ACL \t \t Get %AC For Light Armor" << endl;
@@ -182,11 +183,12 @@ void meleeCalc() {
 	double num(0);
 	while (num >= 0) {
 		cout << "MeleeScaling for ship, enter grade or -9999 to end" << endl;
-		cout << "Number: ";
+		cout << "Grade: ";
 		num = getInt();
+		cout << "Hitdie: ";
+		int num2 = getInt();
 		if (num >= 0) {
-			int num2 = pow(num, 2) * 12;
-			cout << "A " << getGrade(num) << " grade weapon would do " << num2 << " damage" << endl << endl;
+			cout << "A " << getGrade(num) << " grade weapon would do " << Roller::rollWeapon(num2) << " damage" << endl << endl;
 		}
 	}
 }
@@ -221,11 +223,12 @@ void enemyCalc() {
 	double num(0);
 	while (num >= 0) {
 		cout << "EnemyScaling for ship, enter level or -9999 to end" << endl;
-		cout << "Number: ";
+		cout << "Level: ";
 		num = getInt();
-		if (num >= 0) {
-			int num2 = pow(num, (3.7))/10 + 19.9;
-			cout << "A level " << num  << "enemy should have " << num2 << " Health" << endl << endl;
+		cout << "HitDie: ";
+		int num2 = getInt();
+		if (num >= 0 && num2 >= 0) {
+			cout << "A level " << num  << " enemy should have " << Roller::rollMobHealth(num,num2) << " Health" << endl << endl;
 		}
 	}
 }
@@ -236,9 +239,10 @@ void bossCalc() {
 		cout << "BossScaling for ship, enter level or -9999 to end" << endl;
 		cout << "Number: ";
 		num = getInt();
-		if (num >= 0) {
-			int num2 = pow(num, (4.5)) * .15 + 40;
-			cout << "A level " << num << "boss should have " << num2 << " Health" << endl << endl;
+		cout << "HitDie: ";
+		int num2 = getInt();
+		if (num >= 0 && num2 >= 0) {
+			cout << "A level " << num << " boss should have " << Roller::rollBossHealth(num, num2) << " Health" << endl << endl;
 		}
 	}
 }

@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include "Commands.h"
+#include <random>
+#include "RollStat.h"
+
 
 
 using std::cout;
