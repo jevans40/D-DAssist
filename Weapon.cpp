@@ -14,29 +14,15 @@ std::vector<std::string> Weapon::Good;
 std::vector<std::string> Weapon::Godly;
 std::vector<std::string> Weapon::Magical;
 
-Weapon::Weapon() {
-	cout << "Please input a item type";
-	std::string n;
-	cin >> n;
-	cout << "Please input a Grade (1-8)";
-	int newGrade;
-	std::cin >> newGrade;
-	cout << "Please input a HitDie";
-	int hit;
-	std::cin >> hit;
-	hitDie = hit;
-	type = n;
-	grade = newGrade;
-	if (Roller::getRand(100) >= 95) {
-		magical = true;
-	}
-	Roll();
-}
+
 
 Weapon::Weapon(int Grade, int HitDie, std::string type) {
 	grade = Grade;
 	hitDie = HitDie;
 	this->type = type;
+	if (Roller::getRand(100) >= 95) {
+		magical = true;
+	}
 	Roll();
 }
 
@@ -56,11 +42,11 @@ void Weapon::Init() {
 void Weapon::Roll() {
 	attack = Roller::rollAtt(grade);
 	numDie = Roller::rollWeapon(grade, hitDie)/hitDie;
-	name = getName();
+	name = makeName();
 
 }
 
-std::string Weapon::getName() {
+std::string Weapon::makeName() {
 	std::string mods;
 	if(grade == 1) {
 		mods = Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade);
@@ -94,4 +80,21 @@ std::string Weapon::getName() {
 	}
 	mods += " " + type;
 	return mods;
+}
+
+
+const std::string Weapon::getName() {
+	return  name;
+}
+
+const int Weapon::getHitDie() {
+	return hitDie;
+}
+
+const int Weapon::getNumDie() {
+	return numDie;
+}
+
+const int Weapon::getAttack() {
+	return attack;
 }

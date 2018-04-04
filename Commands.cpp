@@ -1,7 +1,7 @@
 #include "MiscUtil.h"
 #include "Commands.h"
 #include "RollStat.h"
-#include "Weapon.h"
+#include "Mob.h"
 
 
 using std::cout;
@@ -34,6 +34,9 @@ void Command(std::string cmd) {
 	}
 	else if (cmd == "MW") {
 		MakeWeapon();
+	}
+	else if (cmd == "MM") {
+		MakeMob();
 	}
 
 
@@ -77,7 +80,7 @@ void printHelp() {
 	cout << "end \t \t End the Program" << endl << endl;
 }
 
-void MakeWeapon() {
+Weapon MakeWeapon() {
 	cout << "Please input a item type ";
 	std::string n;
 	cin >> n;
@@ -89,7 +92,26 @@ void MakeWeapon() {
 	hit = Util::getInt();
 	Weapon l(newGrade,hit,n);
 	l.Stats();
+	return l;
 }
+
+void MakeMob() {
+	Weapon w = MakeWeapon();
+	cout << "Please input a level: ";
+	int level = Util::getInt();
+	cout << "Please input a race: ";
+	std::string race;
+	cin >> race;
+	cout << "Please input a armor grade: ";
+	int grade = Util::getInt();
+	cout << "Please input a hitdie: ";
+	int hitdie = Util::getInt();
+	cout << "Is this a boss? (0 no, 1 yes) ";
+	bool boss = Util::getInt();
+	Mob m(level, w, grade,hitdie,race,boss,false);
+	m.Stats();
+}
+
 
 
 void ACCalcL() {

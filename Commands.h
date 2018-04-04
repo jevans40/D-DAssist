@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Weapon.h"
 #include <iostream>
 
 
@@ -18,9 +19,11 @@ void ACCalcH();
 
 void hamGap();
 
-void MakeWeapon();
+Weapon MakeWeapon();
 
 void enhanceCalc();
+
+void MakeMob();
 
 // Extras
 void magicCalc();

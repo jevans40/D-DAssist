@@ -21,12 +21,22 @@ private:
 	
 public:
 
-	Weapon();
 	Weapon(int Grade = 1, int Hitdie = 2, std::string type = "carrot");
 
 	//Prints out the weapons stats
 	void Weapon::Stats();
 	void Weapon::Roll();
+
+	const std::string Weapon::getName();
+
+	const int Weapon::getHitDie();
+
+	const int Weapon::getNumDie();
+
+	const int Weapon::getAttack();
+
+
 	static void Weapon::Init();
-	std::string Weapon::getName();
+
+	std::string Weapon::makeName();
 };
