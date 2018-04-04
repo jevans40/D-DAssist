@@ -2,6 +2,7 @@
 #include "Commands.h"
 #include "RollStat.h"
 #include "Mob.h"
+#include "GM.h"
 
 
 using std::cout;
@@ -64,6 +65,9 @@ void Command(std::string cmd) {
 	}
 	else if (cmd == "Money") {
 		moneyCalc();
+	}
+	else if (cmd == "GM") {
+		RunGame();
 	}
 }
 

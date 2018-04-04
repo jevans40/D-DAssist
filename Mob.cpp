@@ -30,6 +30,7 @@ Mob::Mob(int lvl, Weapon w, int grade, int hitdie, std::string race, bool bossma
 	this->boss = bossman;
 	this->magical = magicalman;
 	this->killBro = w;
+	this->race = race;
 
 	this->ac = Roller::rollDef(grade);
 
@@ -39,7 +40,7 @@ Mob::Mob(int lvl, Weapon w, int grade, int hitdie, std::string race, bool bossma
 }
 
 void Mob::Stats() {
-	cout << name << " is a  level" << level << ' ' << race << std::endl;
+	cout << name << " is a  level " << level << ' ' << race << std::endl;
 	cout << "They have " << health << " Health and " << ac << " AC and drop " << Exp << " XP when they die" << std::endl;
 	cout << "They also have " << will << " will " << ref << " ref " << fort << "fort" << std::endl;
 	cout << "They weild a " << killBro.getName() << " That does " << killBro.getNumDie() << 'd' << killBro.getHitDie() << " and has " << killBro.getAttack() << " attack\n" << std::endl;
@@ -80,7 +81,6 @@ void Mob::Roll() {
 	}
 
 
-	this->race = race;
 
 	name = makeName();
 }
@@ -90,34 +90,34 @@ std::string Mob::makeName() {
 
 	if (boss) {
 		if (race == "Orc") {
-			mobname = Orc[Roller::getRand(Orc.size())] + " The " + Title[Roller::getRand(Title.size())];
+			mobname += Orc[Roller::getRand(Orc.size())] + " The " + Title[Roller::getRand(Title.size())];
 		}
 		else if (race == "HumanM") {
-			mobname = HumanM[Roller::getRand(HumanM.size())] + " The " + Title[Roller::getRand(Title.size())];
+			mobname += HumanM[Roller::getRand(HumanM.size())] + " The " + Title[Roller::getRand(Title.size())];
 		}
 		else if(race == "HumanW") {
-			mobname = HumanW[Roller::getRand(HumanW.size())] + " The " + Title[Roller::getRand(Title.size())];
+			mobname += HumanW[Roller::getRand(HumanW.size())] + " The " + Title[Roller::getRand(Title.size())];
 		}
 		else if (race == "Elf") {
-			mobname = Elf[Roller::getRand(Elf.size())] + " The " + Title[Roller::getRand(Title.size())];
+			mobname += Elf[Roller::getRand(Elf.size())] + " The " + Title[Roller::getRand(Title.size())];
 		}
 		else if (race == "Hobbit") {
-			mobname = Hobbit[Roller::getRand(Hobbit.size())] + " The " + Title[Roller::getRand(Title.size())];
+			mobname += Hobbit[Roller::getRand(Hobbit.size())] + " The " + Title[Roller::getRand(Title.size())];
 		}
 		else {
-			mobname = Monster[Roller::getRand(Monster.size())] + " The " + Title[Roller::getRand(Title.size())];
+			mobname += Monster[Roller::getRand(Monster.size())] + " The " + Title[Roller::getRand(Title.size())];
 		}
 		
 	}
 	else {
 		if (level < 7) {
-			mobname = Weak[Roller::getRand(Weak.size())];
+			mobname += Weak[Roller::getRand(Weak.size())];
 		}
 		else if (level < 15) {
-			mobname = Average[Roller::getRand(Average.size())];
+			mobname += Average[Roller::getRand(Average.size())];
 		}
 		else {
-			mobname = Strong[Roller::getRand(Strong.size())];
+			mobname += Strong[Roller::getRand(Strong.size())];
 		}
 
 		if (race == "Orc") {
@@ -140,4 +140,38 @@ std::string Mob::makeName() {
 		}
 	}
 	return mobname;
+}
+
+
+const int Mob::getHitDie() {
+	return Mob::hitDie;
+}
+
+
+const void Mob::getAttack() {
+	killBro.Stats();
+}
+
+const int Mob::getHealth() {
+	return health;
+}
+
+const int Mob::getHealthLeft() {
+	return healthleft;
+}
+
+void Mob::setHealthLeft(int newHealth) {
+	healthleft = newHealth;
+}
+
+const std::string Mob::getName() {
+	return name;
+}
+
+const Weapon* Mob::getWeapon() {
+	return &killBro;
+}
+
+const int Mob::getAC() {
+	return ac;
 }

@@ -48,35 +48,35 @@ void Weapon::Roll() {
 
 std::string Weapon::makeName() {
 	std::string mods;
-	if(grade == 1) {
-		mods = Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 2) {
-		mods = Bad[Roller::getRand(Bad.size())] + " " + Average[Roller::getRand(Average.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 3) {
-		mods = Average[Roller::getRand(Average.size())] + " " + Average[Roller::getRand(Average.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 4) {
-		mods = Average[Roller::getRand(Average.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 5) {
-		mods = Average[Roller::getRand(Average.size())] + " " + Good[Roller::getRand(Good.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 6) {
-		mods = Good[Roller::getRand(Good.size())] + " " + Good[Roller::getRand(Good.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 7) {
-		mods = Good[Roller::getRand(Good.size())] + " " + Godly[Roller::getRand(Godly.size())] + " " + Util::getGrade(grade);
-	}
-	else if (grade == 8) {
-		mods = Godly[Roller::getRand(Godly.size())] + " " + Godly[Roller::getRand(Godly.size())] + " " + Util::getGrade(grade);
-	}
-	else {
-		mods = Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade) + " " + Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade);
-	}
 	if (magical) {
 		mods += Magical[Roller::getRand(Magical.size())];
+	}
+	if(grade == 1) {
+		mods += Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 2) {
+		mods += Bad[Roller::getRand(Bad.size())] + " " + Average[Roller::getRand(Average.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 3) {
+		mods += Average[Roller::getRand(Average.size())] + " " + Average[Roller::getRand(Average.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 4) {
+		mods += Average[Roller::getRand(Average.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 5) {
+		mods += Average[Roller::getRand(Average.size())] + " " + Good[Roller::getRand(Good.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 6) {
+		mods += Good[Roller::getRand(Good.size())] + " " + Good[Roller::getRand(Good.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 7) {
+		mods += Good[Roller::getRand(Good.size())] + " " + Godly[Roller::getRand(Godly.size())] + " " + Util::getGrade(grade);
+	}
+	else if (grade == 8) {
+		mods += Godly[Roller::getRand(Godly.size())] + " " + Godly[Roller::getRand(Godly.size())] + " " + Util::getGrade(grade);
+	}
+	else {
+		mods += Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade) + " " + Bad[Roller::getRand(Bad.size())] + " " + Bad[Roller::getRand(Bad.size())] + " " + Util::getGrade(grade);
 	}
 	mods += " " + type;
 	return mods;

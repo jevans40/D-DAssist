@@ -7,6 +7,7 @@ class Mob {
 private:
 	Weapon killBro;
 	int health;
+	int healthleft;
 	int hitDie;
 	int Exp;
 	int level;
@@ -19,6 +20,7 @@ private:
 
 	bool boss = false;
 	bool magical = false;
+
 	std::string name;
 	std::string race;
 
@@ -45,11 +47,19 @@ public:
 
 	const std::string Mob::getName();
 
+	const Weapon* Mob::getWeapon();
+
 	const int Mob::getHitDie();
 
-	const int Mob::getNumDie();
+	const void Mob::getAttack();
 
-	const int Mob::getAttack();
+	const int Mob::getHealth();
+
+	const int Mob::getHealthLeft();
+
+	const int Mob::getAC();
+
+	void Mob::setHealthLeft(int newHealth =  0);
 
 
 	static void Mob::Init();

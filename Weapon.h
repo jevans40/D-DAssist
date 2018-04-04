@@ -3,6 +3,7 @@
 #include <vector>
 
 class Weapon {
+
 private:
 	int attack;
 	int hitDie;
