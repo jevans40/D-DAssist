@@ -36,7 +36,7 @@ int Roller::rollWeapon(double Grade, double hitdie) {
 }
 
 int Roller::rollMoney(double mun) {
-	return (pow(mun, 3) * .5 + 15) * getDis(mun / 10)*mun;
+	return (pow(mun, 3) * .5 + 15) + getDis(mun / 10)*mun;
 }
 
 int Roller::rollXP(double lvl) {

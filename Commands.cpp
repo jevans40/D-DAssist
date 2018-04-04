@@ -81,6 +81,7 @@ void printHelp() {
 	cout << "Enh \t \t Tells you what the next enhancement level will cost" << endl;
 	cout << "ham \t \t Calculate Hammer the Gap Bonus" << endl;
 	cout << "MW \t \t Make a random weapon of your choice!" << endl;
+	cout << "GM \t \t Enter the DM mode" << endl;
 	cout << "end \t \t End the Program" << endl << endl;
 }
 

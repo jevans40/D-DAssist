@@ -15,6 +15,8 @@ void gameGetMob(int num);
 
 void gameDeleteMobs();
 
+void printCmd();
+
 void gameDeleteWeapons();
 
 void gameDamageMob(int index, int damage, int attack);

@@ -10,11 +10,12 @@ std::vector<Weapon*>  Weapons;
 
 using std::cin;
 using std::cout;
+using std::endl;
 
 void RunGame() {
 	std::string cmd = "lol";
 	while (cmd != "exit") {
-		cout << "Please enter a command, or exit to exit DM mode" << std::endl;
+		cout << "Please enter a command, cmd for help, or exit to exit DM mode" << std::endl;
 		cout << "Command: ";
 		cin >> cmd;
 		gameCommands(cmd);
@@ -47,6 +48,22 @@ void gameCommands(std::string cmd) {
 		cout << "Please enter a Mob Index , then damage, then attack: ";
 		gameDamageMob(Util::getInt(), Util::getInt(), Util::getInt());
 	}
+	else if (cmd == "cmd") {
+		printCmd();
+	}
+}
+
+void printCmd() {
+	cout << "\t Commands \n" << endl;
+	cout << "cmd \t \t Print Commands" << endl;
+	cout << "MakeWeapon \t Make a new weapon" << endl;
+	cout << "GetWeapon \t Print out info about Weapon" << endl;
+	cout << "DeleteWeapons  \t Deletes all Weapons" << endl;
+	cout << "MakeMob \t Make a new Mob" << endl;
+	cout << "GetMob \t \t Print out stats for mob" << endl;
+	cout << "DeleteMobs \t Deletes all Mobs" << endl;
+	cout << "DamageMob \t DamageMob" << endl;
+	cout << "end \t \t End the Program" << endl << endl;
 }
 
 void gameMakeWeapon() {
