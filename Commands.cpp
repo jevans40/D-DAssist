@@ -1,48 +1,14 @@
+#include "MiscUtil.h"
 #include "Commands.h"
 #include "RollStat.h"
+#include "Weapon.h"
+
 
 using std::cout;
 using std::cin;
 using std::endl;
 
-int getInt() {
-	int intvalue;
-	while (!(cin >> intvalue)) {
-		cin.clear();
-		cin.ignore();
-	}
-	return intvalue;
-}
 
-std::string getGrade(int g) {
-	std::string Grade;
-	switch (g) {
-	case 2:
-		Grade = "Uncommon";
-		break;
-	case 3:
-		Grade = "Great";
-		break;
-	case 4:
-		Grade = "Rare";
-		break;
-	case 5:
-		Grade = "Epic";
-		break;
-	case 6:
-		Grade = "Heroic";
-		break;
-	case 7:
-		Grade = "Devine";
-		break;
-	case 8:
-		Grade = "Mythic";
-		break;
-	default:
-		Grade = "Common";
-	}
-	return Grade;
-}
 
 void Command(std::string cmd) {
 	if (cmd == "cmd") {
@@ -65,6 +31,9 @@ void Command(std::string cmd) {
 	}
 	else if (cmd == "Enh") {
 		enhanceCalc();
+	}
+	else if (cmd == "MW") {
+		MakeWeapon();
 	}
 
 
@@ -102,9 +71,24 @@ void printHelp() {
 	cout << "ACL \t \t Get %AC For Light Armor" << endl;
 	cout << "ACM \t \t Get %AC For Medium Armor" << endl;
 	cout << "ACH \t \t Get %AC For Heavy Armor" << endl;
-	cout << "ham \t \t Calculate Hammer the Gap Bonus" << endl;
 	cout << "Enh \t \t Tells you what the next enhancement level will cost" << endl;
+	cout << "ham \t \t Calculate Hammer the Gap Bonus" << endl;
+	cout << "MW \t \t Make a random weapon of your choice!" << endl;
 	cout << "end \t \t End the Program" << endl << endl;
+}
+
+void MakeWeapon() {
+	cout << "Please input a item type ";
+	std::string n;
+	cin >> n;
+	cout << "Please input a Grade (1-8) ";
+	int newGrade;
+	newGrade = Util::getInt();
+	cout << "Please input a HitDie ";
+	int hit;
+	hit = Util::getInt();
+	Weapon l(newGrade,hit,n);
+	l.Stats();
 }
 
 
@@ -113,7 +97,7 @@ void ACCalcL() {
 	while(num >= 0){
 		cout << "L AC Calc, enter an AC or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			int num2 =  (100 - ((((-100 * (num*num) + 400 * num) / (2 * num*num)) + 60) * 2.5)) * (-1);
 			cout << "You would take " << num2 << " Percent of incoming damage" << endl << endl;
@@ -132,7 +116,7 @@ void ACCalcM() {
 	while (num >= 0) {
 		cout << "M AC Calc, enter an AC or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			int num2 = (100 - ((((-100 * (num*num) + 400 * num) / (2 * num*num)) + 60) * 5)) * (-1);
 			cout << "You would take " << num2 << " Percent of incoming damage" << endl << endl;
@@ -145,7 +129,7 @@ void ACCalcH() {
 	while (num >= 0) {
 		cout << "H AC Calc, enter an AC or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			int num2 = (100 - ((((-100 * (num*num) + 400 * num) / (2 * num*num)) + 60) * 10)) * (-1);
 			cout << "You would take " << num2 << " Percent of incoming damage" << endl << endl;
@@ -158,7 +142,7 @@ void hamGap() {
 	while (num >= 0) {
 		cout << "Hammer The Gap Calc Calc, enter num of shots or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			num = num*(num+1)/2;
 			cout << "You deal " << num << " damage" << endl << endl;
@@ -171,7 +155,7 @@ void magicCalc() {
 	while (num >= 0) {
 		cout << "MagicScaling for ship, enter level of magic or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			cout << "A level  " << num << " Spell would do " << Roller::getMagic(num) << " damage" << endl << endl;
 		}
@@ -183,11 +167,11 @@ void meleeCalc() {
 	while (num >= 0) {
 		cout << "MeleeScaling for ship, enter grade or -9999 to end" << endl;
 		cout << "Grade: ";
-		num = getInt();
+		num = Util::getInt();
 		cout << "Hitdie: ";
-		int num2 = getInt();
+		int num2 = Util::getInt();
 		if (num >= 0) {
-			cout << "A " << getGrade(num) << " grade weapon would do " << Roller::rollWeapon(num,num2) << " damage" << endl << endl;
+			cout << "A " << Util::getGrade(num) << " grade weapon would do " << Roller::rollWeapon(num,num2) << " damage" << endl << endl;
 		}
 	}
 }
@@ -197,7 +181,7 @@ void healCalc() {
 	while (num >= 0) {
 		cout << "HealScaling for ship, enter level of spell or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			cout << "A level  " << num << " spell would heal " << Roller::getHealing(num) << " damage" << endl << endl;
 		}
@@ -209,7 +193,7 @@ void skillCalc() {
 	while (num >= 0) {
 		cout << "Skill Calc, enter skill or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			int num2 = (100 - ((((-50 * (num*num) + 100 * num) / (2 * num*num)) + 35) * 10)) * (-1);
 			cout << "Your skill on a 1-100 scale is " << num2 << endl << endl;
@@ -222,9 +206,9 @@ void enemyCalc() {
 	while (num >= 0) {
 		cout << "EnemyScaling for ship, enter level or -9999 to end" << endl;
 		cout << "Level: ";
-		num = getInt();
+		num = Util::getInt();
 		cout << "HitDie: ";
-		int num2 = getInt();
+		int num2 = Util::getInt();
 		if (num >= 0 && num2 >= 0) {
 			cout << "A level " << num  << " enemy should have " << Roller::rollMobHealth(num,num2) << " Health" << endl << endl;
 		}
@@ -236,9 +220,9 @@ void bossCalc() {
 	while (num >= 0) {
 		cout << "BossScaling for ship, enter level or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		cout << "HitDie: ";
-		int num2 = getInt();
+		int num2 = Util::getInt();
 		if (num >= 0 && num2 >= 0) {
 			cout << "A level " << num << " boss should have " << Roller::rollBossHealth(num, num2) << " Health" << endl << endl;
 		}
@@ -250,7 +234,7 @@ void XPCalc() {
 	while (num >= 0) {
 		cout << "XPScaling for ship, enter level or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			cout << "A level " << num << "enemy should drop " << Roller::rollXP(num) << " EXP" << endl << endl;
 		}
@@ -262,7 +246,7 @@ void moneyCalc() {
 	while (num >= 0) {
 		cout << "MoneyScaling for ship, enter level or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			cout << "A level " << num << "Quest should drop " << Roller::rollMoney(num) << " Gold" << endl << endl;
 		}
@@ -274,7 +258,7 @@ void enhanceCalc() {
 	while (num >= 0) {
 		cout << "EnhanceScaling for ship, enter enhancement level or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			cout << "A level " << num << "upgrade should cost " << Roller::getEnhance(num) << " Gold" << endl << endl;
 		}
@@ -286,7 +270,7 @@ void attackCalc() {
 	while (num >= 0) {
 		cout << "attackScaling for ship, enter enhancement level or -9999 to end" << endl;
 		cout << "Number: ";
-		num = getInt();
+		num = Util::getInt();
 		if (num >= 0) {
 			int num2 = pow(num, (3.2)) + 9;
 			cout << "A level " << num << "upgrade should cost " << num2 << " Gold" << endl << endl;

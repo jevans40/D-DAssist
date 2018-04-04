@@ -67,3 +67,11 @@ int Roller::getHealing(double lvl) {
 int Roller::getEnhance(double lvl) {
 	return round(pow(lvl, (3.2)) + 9);
 }
+
+int Roller::getRand(int n) {
+	if (n <= 0) n = 1;
+	std::uniform_int_distribution<int> uniform_dist(0, n-1);
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(seed);
+	return uniform_dist(generator);
+}

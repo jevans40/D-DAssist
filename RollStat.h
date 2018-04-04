@@ -7,13 +7,18 @@ private:
 public:
 	//Get a random number normally distributed with sigma of mod
 	static double getDis(double mod = .1);
+
+	//Get a random number
+	static int getRand(int n = 1);
 	
 	//Get a random Mob Health based on level and its base hitDie
 	static int rollMobHealth(double level = 0, double hitDie = 2);
 
+	//Get a random Boss Health based on level and hitDie
+	static int rollBossHealth(double level = 0, double hitDie = 2);
+
 	//Get a random weapon damage
 	static int rollWeapon(double grade = 0, double hitDie = 2);
-	static int rollBossHealth(double level = 0, double hitDie = 2);
 	static int rollMoney(double mun = 0);
 	static int rollXP(double lvl = 0);
 	static int rollDef(double grade = 0);
