@@ -173,8 +173,7 @@ void magicCalc() {
 		cout << "Number: ";
 		num = getInt();
 		if (num >= 0) {
-			int num2 = pow(2,num)*5;
-			cout << "A level  " << num << " Spell would do " << num2 << " damage" << endl << endl;
+			cout << "A level  " << num << " Spell would do " << Roller::getMagic(num) << " damage" << endl << endl;
 		}
 	}
 }
@@ -188,7 +187,7 @@ void meleeCalc() {
 		cout << "Hitdie: ";
 		int num2 = getInt();
 		if (num >= 0) {
-			cout << "A " << getGrade(num) << " grade weapon would do " << Roller::rollWeapon(num2) << " damage" << endl << endl;
+			cout << "A " << getGrade(num) << " grade weapon would do " << Roller::rollWeapon(num,num2) << " damage" << endl << endl;
 		}
 	}
 }
@@ -200,8 +199,7 @@ void healCalc() {
 		cout << "Number: ";
 		num = getInt();
 		if (num >= 0) {
-			int num2 = pow(2,(0.8 * num)) * 5;
-			cout << "A grade  " << num << " weapon would do " << num2 << " damage" << endl << endl;
+			cout << "A level  " << num << " spell would heal " << Roller::getHealing(num) << " damage" << endl << endl;
 		}
 	}
 }
@@ -254,8 +252,7 @@ void XPCalc() {
 		cout << "Number: ";
 		num = getInt();
 		if (num >= 0) {
-			int num2 = pow(num, (1.125)) * 75;
-			cout << "A level " << num << "enemy should drop " << num2 << " EXP" << endl << endl;
+			cout << "A level " << num << "enemy should drop " << Roller::rollXP(num) << " EXP" << endl << endl;
 		}
 	}
 }
@@ -267,8 +264,7 @@ void moneyCalc() {
 		cout << "Number: ";
 		num = getInt();
 		if (num >= 0) {
-			int num2 = pow(num, 3) * .5 + 15;
-			cout << "A level " << num << "Quest should drop " << num2 << " Gold" << endl << endl;
+			cout << "A level " << num << "Quest should drop " << Roller::rollMoney(num) << " Gold" << endl << endl;
 		}
 	}
 }
@@ -277,6 +273,18 @@ void enhanceCalc() {
 	double num(0);
 	while (num >= 0) {
 		cout << "EnhanceScaling for ship, enter enhancement level or -9999 to end" << endl;
+		cout << "Number: ";
+		num = getInt();
+		if (num >= 0) {
+			cout << "A level " << num << "upgrade should cost " << Roller::getEnhance(num) << " Gold" << endl << endl;
+		}
+	}
+}
+
+void attackCalc() {
+	double num(0);
+	while (num >= 0) {
+		cout << "attackScaling for ship, enter enhancement level or -9999 to end" << endl;
 		cout << "Number: ";
 		num = getInt();
 		if (num >= 0) {
