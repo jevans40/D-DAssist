@@ -1,4 +1,5 @@
 #include "FileHandle.h"
+#include "MiscUtil.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -20,4 +21,46 @@ std::vector<std::string> GetFileStringList(std::string filename) {
 	}
 
 	return strings;
+}
+
+std::vector<double> GetFileWeights(std::string file, char type) {
+	std::vector<double> vect;
+	std::ifstream input;
+	input.open(file);
+
+	char tmpchar;
+	int tmpint;
+
+	if (!input.is_open()) {
+		throw _CRT_ERROR;
+	}
+	
+	input >> tmpchar;
+
+	if (tmpchar != type) {
+		return vect;
+	}
+	
+	while (!input.eof()) {
+		input >> tmpint;
+		if (input.peek() == ',') {
+			input.clear();
+			input.ignore();
+		}
+	}
+	
+	return vect;
+}
+
+bool setFileWeights(std::vector<double> weights, std::string filename, char type) {
+	std::ofstream output;
+	output.open("Weights/"+filename+".csl");
+	if (!output.is_open()) {
+		return false;
+	}
+	output << type << '\n';
+	for (int i = 0; i < weights.size(); i++) {
+		output << weights[i] << ',';
+	}
+	return true;
 }
